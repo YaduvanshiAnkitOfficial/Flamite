@@ -20,8 +20,6 @@ Flamite.MatchesMatchController = Ember.Controller.extend(Ember.Evented, {
       });
 
       this.set('message', '');
-
-      _gaq && _gaq.push(['_trackEvent', 'matches', 'post']);
     }
   }
 });

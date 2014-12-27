@@ -92,14 +92,11 @@ Flamite.LikeController = Ember.ArrayController.extend({
 
     like: function(like, user, callback) {
 
-      _gaq && _gaq.push(['_trackEvent', 'matches', like ? 'like' : 'dislike']);
-
       chrome.runtime.sendMessage({
         type: 'request',
         path: (like ? 'like' : 'pass') + '/' + user.id
       }, function(result) {
         if (result.match) {
-          _gaq && _gaq.push(['_trackEvent', 'match', 'hit']);
           this.set('stats.matchs', this.get('stats.matchs') + 1);
         }
 
