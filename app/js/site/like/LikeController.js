@@ -113,6 +113,26 @@ Flamite.LikeController = Ember.ArrayController.extend({
 
     changeDelay: function() {
       this.set('delay', $('.delay-select').val());
+    },
+
+    changeLocation: function() {
+      var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent($('#field-location').val());
+      var controller = this;
+      $.getJSON(url, function(googleResponse) {
+        var point = googleResponse.results[0].geometry.location;
+        chrome.runtime.sendMessage(
+          {
+            type: 'request',
+            method: 'POST',
+            path: 'user/ping',
+            data: {lat: point.lat, lon: point.lng}
+          },
+          function(tinterResponse) {
+            if(!tinterResponse.error && tinterResponse.status == 200)
+              location.reload();
+          }
+        );
+      });
     }
   }
 });
