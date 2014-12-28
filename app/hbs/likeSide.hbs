@@ -1,5 +1,9 @@
 <div class="side-like">
   <div class="options">
+    <div class="field">
+      <label for="field-location">Change location</label>
+      <input type="text" id="field-location" class="location-select field-select" {{action "changeLocation" on="change"}}>
+    </div>
     <div class="field field-checkbox">
       {{input type="checkbox" name="likeAuto" id="field-like" checked=likeAuto}}
       <label for="field-like">Like automatically</label>
